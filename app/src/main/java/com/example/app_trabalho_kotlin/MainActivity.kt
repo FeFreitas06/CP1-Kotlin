@@ -20,22 +20,47 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            App_trabalho_kotlinTheme  {
-                val navController = rememberNavController()
-
+            Android5navigationbetweenscreensTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NavHost(navController = navController, startDestination = "login") {
-                        composable("login") {
-                            LoginScreen(modifier = Modifier.padding(innerPadding), navController = navController)
+                    val navController = rememberNavController()
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = "login",
+                    ) {
+                        composable(route = "login") {
+                            LoginScreen(modifier = Modifier.padding(innerPadding), navController)
                         }
-                        composable("menu") {
-                            MenuScreen(modifier = Modifier.padding(innerPadding), navController = navController)
+                        composable(route = "menu") {
+                            MenuScreen(modifier = Modifier.padding(innerPadding), navController)
                         }
-                        composable("perfil") {
-                            PerfilScreen(modifier = Modifier.padding(innerPadding), navController = navController)
+                        composable(
+                            route = "pedidos?cliente={cliente}",
+                            arguments = listOf(navArgument("cliente") {
+                                defaultValue = "Cliente Genérico"
+                            })
+                        ) {
+                            PedidosScreen(
+                                modifier = Modifier.padding(innerPadding),
+                                navController,
+                                it.arguments?.getString("cliente")
+                            )
                         }
-                        composable("pedidos") {
-                            PedidosScreen(modifier = Modifier.padding(innerPadding), navController = navController)
+                        composable(
+                            route = "perfil/{nome}/{idade}",
+                            arguments = listOf(
+                                navArgument("nome") { type = NavType.StringType },
+                                navArgument("idade") { type = NavType.IntType }
+                            )
+                        ) {
+                            val nome: String? = it.arguments?.getString("nome", "Usuário Genérico")
+                            val idade: Int? = it.arguments?.getInt("idade", 0)
+                            PerfilScreen(
+                                modifier = Modifier.padding(innerPadding),
+                                navController,
+                                nome!!,
+                                idade!!
+                            )
                         }
                     }
                 }

@@ -24,7 +24,7 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFF3F51B5)) // Fundo Azul
+            .background(Color(0xFF2C4EC7))
             .padding(32.dp)
     ) {
         Text(
@@ -34,31 +34,45 @@ fun MenuScreen(modifier: Modifier = Modifier, navController: NavController) {
             color = Color.White
         )
         Column(
-            modifier = Modifier.align(Alignment.Center),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center)
         ) {
-            val buttonModifier = Modifier.fillMaxWidth(0.5f)
             Button(
-                onClick = { navController.navigate("perfil") },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                modifier = buttonModifier
+                onClick = { navController.navigate("perfil/Fulano de Tal/27") },
+                colors = ButtonDefaults.buttonColors(Color.White),
+                modifier = Modifier.size(width = 200.dp, height = 48.dp)
             ) {
-                Text(text = "Perfil", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.Blue)
+                Text(
+                    text = "Perfil",
+                    fontSize = 20.sp,
+                    color = Color.Blue
+                )
             }
+            Spacer(modifier = Modifier.height(16.dp))
             Button(
-                onClick = { navController.navigate("pedidos") },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                modifier = buttonModifier
+                onClick = { navController.navigate("pedidos?cliente=Cliente XPTO") },
+                colors = ButtonDefaults.buttonColors(Color.White),
+                modifier = Modifier.size(width = 200.dp, height = 48.dp)
             ) {
-                Text(text = "Pedidos", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.Blue)
+                Text(
+                    text = "Pedidos",
+                    fontSize = 20.sp,
+                    color = Color.Blue
+                )
             }
+            Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = { navController.navigate("login") },
-                colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                modifier = buttonModifier
+                colors = ButtonDefaults.buttonColors(Color.White),
+                modifier = Modifier.size(width = 200.dp, height = 48.dp)
             ) {
-                Text(text = "Sair", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.Blue)
+                Text(
+                    text = "Sair",
+                    fontSize = 20.sp,
+                    color = Color.Blue
+                )
             }
         }
     }
